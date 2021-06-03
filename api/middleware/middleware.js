@@ -12,6 +12,7 @@ async function validateUserId(req, res, next) {
   try{
     const user = await User.getById(req.params.id)
     if(user){
+      req.user = user
       next()
     }else{
       res.status(404).json(({
