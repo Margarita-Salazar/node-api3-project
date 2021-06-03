@@ -2,7 +2,8 @@ const User = require('../users/users-model')
 
 function logger(req, res, next) {
   // DO YOUR MAGIC
-  console.log(req)
+  req.timeStamp = Date.now()
+  console.log(`${req.method}, ${req.baseUrl}, and ${req.timeStamp}`)
   next()
 }
 

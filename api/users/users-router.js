@@ -8,10 +8,20 @@ const router = express.Router();
 const User = require('./users-model')
 const Post = require('../posts/posts-model')
 
-router.get('/', (req, res) => {
+const {
+  logger,
+  validateUserId,
+  validateUser,
+  validatePost
+} = require('../middleware/middleware')
+
+router.get('/', logger, (req, res, next) => {
   // RETURN AN ARRAY WITH ALL THE USERS
-
-
+  User.get()
+    .then(user=>{
+      res.status(200).json(user)
+    })
+    .catch(next)
 });
 
 router.get('/:id', (req, res) => {
