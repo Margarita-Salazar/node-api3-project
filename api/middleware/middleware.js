@@ -29,13 +29,12 @@ function validateUser(req, res, next) {
   const { name } = req.body
   if(
       !name || 
-      !name.trim
+      !name.trim()
     ){
       res.status(400).json({
         message: 'missing required name field'
       })
     }else{
-      req.name = name
       next()
     }
 }
@@ -44,13 +43,12 @@ function validatePost(req, res, next) {
   const { text } = req.body
   if(
     !text || 
-    !text.trim
+    !text.trim()
   ){
     res.status(400).json({
       message: 'missing required text field'
     })
   }else{
-    req.text = text
     next()
   }
 }
