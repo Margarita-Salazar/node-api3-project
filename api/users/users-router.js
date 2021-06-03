@@ -24,14 +24,20 @@ router.get('/', logger, (req, res, next) => {
     .catch(next)
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', logger, validateUserId, (req, res) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
+  res.status(200).json(req.user)
 });
 
-router.post('/', (req, res) => {
+router.post('/', logger, validateUser, (req, res, next) => {
   // RETURN THE NEWLY CREATED USER OBJECT
   // this needs a middleware to check that the request body is valid
+  User.insert(req.name)
+    .then(user=>{
+      res.status(201).json(user)
+    })
+    .catch(next)
 });
 
 router.put('/:id', (req, res) => {
